@@ -1,0 +1,16 @@
+{
+    "name": "webfox/silverstripe-helpers",
+    "description": "Core extensions with default helpers",
+    "require": {
+        "silverstripe/cms": "~3.1",
+	"raveren/kint": "dev-master"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matthew Hailwood",
+            "email": "matthew@webfox.co.nz"
+        }
+    ],
+    "minimum-stability": "dev"
+}
