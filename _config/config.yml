@@ -1,0 +1,6 @@
+---
+Name: silverstripe-helpers
+---
+DataList:
+  extensions:
+    - DataListExtension
