@@ -5,6 +5,6 @@ DataList:
   extensions:
     - DataListExtension
 
-#SiteTree:
+#Page:
 #  extensions:
 #    - FooterMenuExtension
