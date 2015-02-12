@@ -6,7 +6,7 @@ Run the following to add this module as a requirement and install it via compose
 ```
 #!bash
 
-composer require "webfox/silverstripe-helpers:dev-master"
+composer require "webfox/silverstripe-helpers"
 ```
 then browse to /dev/build?flush=all
 
