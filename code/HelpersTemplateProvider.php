@@ -13,8 +13,9 @@ class HelpersTemplateProvider implements TemplateGlobalProvider {
 
 	public static function Repeat($times){
 		$list = new ArrayList();
-		for($i = 1; $i >= $times; $i++){
-			$list->push(array('Num' => $i));
+		$formatter = new NumberFormatter('en-NZ', NumberFormatter::SPELLOUT);
+		for($i = 1; $i <= $times; $i++){
+			$list->push(array('Num' => $i, 'Word' => ucwords(strtolower($formatter->format($i)))));
 		}
 
 		return $list;

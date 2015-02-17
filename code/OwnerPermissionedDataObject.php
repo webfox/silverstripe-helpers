@@ -14,7 +14,7 @@ class OwnerPermissionedDataObject extends DataObject {
 	 * @return DataObject
 	 */
 	protected function RelationOwner() {
-		if (method_exists($this, self::$relationOwnerMethod)) {
+		if ($this->hasMethod(self::$relationOwnerMethod)) {
 			return $this->{self::$relationOwnerMethod}();
 		} else {
 			throw new BadMethodCallException(
