@@ -13,6 +13,14 @@
  */
 class NavHolderPage extends Page {
 
+	/**
+	 * Set to return false if this page should not be added to as the first child of it's dropdown list if it is a parent
+	 *
+	 * @return bool
+	 */
+	public function ShowInDropdownIfParent(){
+		return false;
+	}
 }
 
 

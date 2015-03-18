@@ -12,6 +12,14 @@
  */
 class ChildlessPage extends Page {
 
+	/**
+	 * Set to return true if this page should not show it's children in the nav
+	 *
+	 * @return bool
+	 */
+	public function HideChildrenFromNavigation() {
+		return true;
+	}
 }
 
 
