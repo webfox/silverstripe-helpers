@@ -14,7 +14,9 @@ class OwnerPermissionedDataObject extends DataObject {
 	 * @return DataObject
 	 */
 	protected function RelationOwner() {
-		if ($this->hasMethod(static::$relationOwnerMethod)) {
+		if (is_null(static::$relationOwnerMethod)) {
+			return false;
+		} elseif ($this->hasMethod(static::$relationOwnerMethod)) {
 			return $this->{static::$relationOwnerMethod}();
 		} else {
 			throw new BadMethodCallException(
@@ -24,18 +26,22 @@ class OwnerPermissionedDataObject extends DataObject {
 	}
 
 	public function canView($member = null) {
-		return $this->RelationOwner()->canView($member);
+		return $this->askOwnerForPermission(__FUNCTION__, $member);
 	}
 
 	public function canEdit($member = null) {
-		return $this->RelationOwner()->canEdit($member);
+		return $this->askOwnerForPermission(__FUNCTION__, $member);
 	}
 
 	public function canDelete($member = null) {
-		return $this->RelationOwner()->canDelete($member);
+		return $this->askOwnerForPermission(__FUNCTION__, $member);
 	}
 
 	public function canCreate($member = null) {
-		return $this->RelationOwner()->canCreate($member);
+		return $this->askOwnerForPermission(__FUNCTION__, $member);
+	}
+
+	protected function askOwnerForPermission($method, $member){
+		return $this->RelationOwner() ? $this->RelationOwner()->{$method}($member) : singleton('Page')->{$method}($member);
 	}
 }

@@ -42,6 +42,7 @@ would result in something like "1 |18 |19 |24".
 ##OwnerPermissionedDataObject##
  - Allows data objects to inherit the access permissions from their attached relation parent
  - Relation parent defaults to `Page()`
+ - If `static::$relationOwner` is set to `null` will fall back to asking the standard `Page` for permission
  
 #Page Types Overview#
  
