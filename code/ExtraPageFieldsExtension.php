@@ -13,12 +13,15 @@ class ExtraPageFieldsExtension extends SiteTreeExtension {
 
 	public function updateCMSFields(FieldList $fields) {
 
-		//Add secondary heading - H2
-		$fields->addFieldToTab('Root.Main', TextField::create('SubTitle', 'Secondary Heading'), 'MenuTitle');
+		//change Page Name label to Primary Heading - H1 - Only if the title hasn't already been changed
+		/** @var TextField $titleField */
+		$titleField = $fields->dataFieldByName('Title');
+		if ($titleField->Title() == 'Page Name') {
+			$fields->renameField('Title', 'Primary Heading');
+		}
 
-		//change Page Name label to Primary Heading - H1
-		$fields->removeFieldFromTab('Root.Main', 'Page name');
-		$fields->addFieldToTab('Root.Main', TextField::create('Title', 'Primary Heading'), 'SubTitle');
+		//Add secondary heading - H2
+		$fields->insertAfter(TextField::create('SubTitle', 'Secondary Heading'), 'Title');
 
 		//Move meta fields to their own tab
 
