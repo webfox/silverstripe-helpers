@@ -9,6 +9,10 @@ SiteTree:
   extensions:
     - ExtraPageFieldsExtension
 
+Image:
+  extensions:
+    - ImageExtension
+
 #SiteTree:
 #  extensions:
 #    - FooterMenuExtension
