@@ -20,16 +20,23 @@ Several of these helpers are disabled by default but can be enabled in the confi
 #Extension Overview#
 
 ##DataListExtension##
-Adds a new *ListColumn* function to a DataList to allow implode() style functionality of the list items e.g. `$list->ListColumn('ID', ' |')` 
-would result in something like "1 |18 |19 |24".
+ - Adds a new *ListColumn* function to a DataList to allow implode() style functionality of the list items  
+   e.g. `$list->ListColumn('ID', ' |')` would result in something like "1 |18 |19 |24".
+ - Automatically applied
 
 ##ExtraPageFieldsExtension##
  - Moves the metadata fields to a new tab
  - Adds a new "Meta Title" field
+ - Automatically applied
  
 ##FooterMenuExtension##
  - Adds a new *ShowInFooter* option to the page settings
  - Adds a new `FooterPages()` function to the SiteTree to return only pages that have this checked
+
+##ImageExtension##
+ - Adds a new *Image Alt Text* option to the image settings
+ - Makes the image settings fields full width
+ - Automatically applied
 
 #Template Providers Overview#
 
