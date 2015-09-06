@@ -9,7 +9,7 @@
   "type": "silverstripe-module",
   "require": {
     "silverstripe/cms": "~3.1",
-    "raveren/kint": "~0.9"
+    "raveren/kint": "~1.0.6"
   },
   "license": "MIT",
   "authors": [
