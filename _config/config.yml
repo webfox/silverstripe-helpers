@@ -13,6 +13,10 @@ Image:
   extensions:
     - ImageExtension
 
+Link:
+  extensions:
+    - Link
+
 #SiteTree:
 #  extensions:
 #    - FooterMenuExtension

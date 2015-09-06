@@ -37,6 +37,11 @@ Several of these helpers are disabled by default but can be enabled in the confi
  - Adds a new *Image Alt Text* option to the image settings
  - Makes the image settings fields full width
  - Automatically applied
+ 
+##LinkExtension##
+ - Adds a new *SEO Text* option to the link settings
+ - Adds a *force download* checkbox to the link if it's set to a file.
+ - Automatically applied
 
 #Template Providers Overview#
 
