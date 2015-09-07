@@ -15,7 +15,7 @@ Image:
 
 Link:
   extensions:
-    - Link
+    - LinkExtension
 
 #SiteTree:
 #  extensions:
