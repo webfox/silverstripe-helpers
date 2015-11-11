@@ -8,7 +8,8 @@ class ExtraPageFieldsExtension extends SiteTreeExtension {
 
 	private static $db = array(
 		'SubTitle'  => 'Text',
-		'MetaTitle' => 'Text'
+		'MetaTitle' => 'Text',
+		'MenuTarget' => 'Varchar(255)'
 	);
 
 	public function updateCMSFields(FieldList $fields) {
@@ -39,5 +40,16 @@ class ExtraPageFieldsExtension extends SiteTreeExtension {
 
 	}
 
+	public function updateSettingsFields(FieldList $fields) {
+		//quick links option
+		$fields->addFieldToTab("Root.Settings", new DropdownField('MenuTarget', 'Open page in', [
+			'' => 'Current Tab (Browser default)',
+			'_blank' => 'New Tab'
+		]));
+	}
+
+	Public function MenuTarget(){
+		return empty($this->owner->MenuTarget) ? '' : "target=\"{$this->owner->MenuTarget}\"";
+	}
 }
 
