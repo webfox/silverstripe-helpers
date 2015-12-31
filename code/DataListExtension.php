@@ -38,5 +38,4 @@ class DataListExtension extends Extension
             return $obj->{$relation}()->OnlyVisible()->exists();
         });
     }
-
 }
