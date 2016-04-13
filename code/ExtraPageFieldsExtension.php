@@ -7,7 +7,7 @@
 class ExtraPageFieldsExtension extends SiteTreeExtension
 {
 
-    private $metaDescriptionLength = 156;
+    private $MetaDescriptionLength = 156;
 
     private static $db = array(
         'SubTitle'   => 'Text',
@@ -38,7 +38,8 @@ class ExtraPageFieldsExtension extends SiteTreeExtension
         $fields->addFieldToTab('Root', Tab::create('Metadata'), 'Content');
 
         //Add META Title tag to METADATA
-        $metaDataChildren->fieldByName('MetaDescription')->setAttribute('maxlength', $this->metaDescriptionLength);
+        $length = $this->owner->config()->MetaDescriptionLength ?: $this->MetaDescriptionLength;
+        $metaDataChildren->fieldByName('MetaDescription')->setAttribute('maxlength', $length);
         $fields->addFieldsToTab('Root.Metadata', $children);
 
         $metaTitle->setDescription('Displayed as the tab/window name; Also displayed in search engine result listings as the page title.<br />
