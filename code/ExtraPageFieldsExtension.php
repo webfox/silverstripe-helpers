@@ -66,10 +66,10 @@ class ExtraPageFieldsExtension extends SiteTreeExtension
         parent::onBeforeWrite();
 
 
-        if (strlen($this->owner->MetaDescription) > $this->metaDescriptionLength) {
+        if (strlen($this->owner->MetaDescription) > $this->MetaDescriptionLength) {
             /** @var Text $value */
             $value                        = $this->owner->dbObject('MetaDescription');
-            $value                        = $value->LimitCharacters($this->metaDescriptionLength);
+            $value                        = $value->LimitCharacters($this->MetaDescriptionLength);
             $this->owner->MetaDescription = $value;
         };
 
