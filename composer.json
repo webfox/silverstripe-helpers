@@ -1,0 +1,24 @@
+{
+  "name": "webfox/silverstripe-helpers",
+  "description": "Core extensions with default helpers",
+  "keywords": [
+    "webfox",
+    "silverstripe",
+    "helpers"
+  ],
+  "type": "silverstripe-module",
+  "require": {
+    "silverstripe/cms": "~3.1",
+    "raveren/kint": "~1.0.6"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Matthew Hailwood",
+      "email": "matthew@webfox.co.nz"
+    }
+  ],
+  "extra": {
+    "installer-name": "silverstripe-helpers"
+  }
+}
