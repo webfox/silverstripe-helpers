@@ -61,6 +61,12 @@ class ExtraPageFieldsExtension extends SiteTreeExtension
         return empty($this->owner->MenuTarget) ? '' : "target=\"{$this->owner->MenuTarget}\"";
     }
 
+    Public function MetaTags(& $tags) {
+        if(is_a(Director::get_current_page(), 'Security')){
+            $tags = $tags . '<meta name="robots" content="noindex">';
+        } 
+    }
+
     public function onBeforeWrite()
     {
         parent::onBeforeWrite();
