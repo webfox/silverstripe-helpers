@@ -13,6 +13,10 @@ SiteTree:
   extensions:
     - ExtraPageFieldsExtension
 
+SiteConfig:
+  extensions:
+    - WebFoxSiteConfig
+
 Image:
   extensions:
     - ImageExtension
