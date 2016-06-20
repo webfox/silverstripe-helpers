@@ -5,6 +5,10 @@ DataList:
   extensions:
     - DataListExtension
 
+ArrayList:
+  extensions:
+    - DataListExtension
+
 SiteTree:
   extensions:
     - ExtraPageFieldsExtension
