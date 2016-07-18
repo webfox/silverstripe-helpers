@@ -1,6 +1,10 @@
 ---
 Name: silverstripe-helpers
 ---
+Controller:
+  extensions:
+    - SS_RelativeAssetsResponseExtension
+
 DataList:
   extensions:
     - DataListExtension
