@@ -29,7 +29,28 @@ Several of these helpers are disabled by default but can be enabled in the confi
  - Adds a new "Meta Title" field
  - Automatically applied
  
-If you do not add the `HasOnAfterUpdateCMSFieldsExtensionPoint` trait to your base `Page` class then the extension will use an unreliable method of moving the pages. For this reason we suggest adding `use HasOnAfterUpdateCMSFieldsExtensionPoint;` to this class. 
+If you do not add the `HasOnAfterUpdateCMSFieldsExtensionPoint` trait to your base `Page` class then the extension will use an unreliable method of moving the pages. For this reason we suggest adding `use HasOnAfterUpdateCMSFieldsExtensionPoint;` to this class.
+
+As the trait overrides the constructor you may also set `has_after_update_cms_fields_extension_point` to true which will also enable the new method, however it becomes your responsibility to ensure you have merged the traits functionality into your constructor either manually or using 
+
+```php
+class Page extends SiteTree {
+
+    use HasOnAfterUpdateCMSFieldsExtensionPoint {
+        HasOnAfterUpdateCMSFieldsExtensionPoint::__construct as __TraitConstruct;
+    }
+    
+    public function __construct($record = null, $isSingleton = false, $model = null){
+        
+        $this->__TraitConstruct($record, $isSingleton, $model);
+        
+        //your custom things
+        
+        parent::__construct($record, $isSingleton, $model);
+    }
+
+}
+````
  
 ##FooterMenuExtension##
  - Adds a new *ShowInFooter* option to the page settings
