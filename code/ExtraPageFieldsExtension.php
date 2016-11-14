@@ -9,6 +9,8 @@ class ExtraPageFieldsExtension extends SiteTreeExtension
 
     private $MetaDescriptionLength = 156;
 
+    protected static $runs = 0;
+
     private static $db = array(
         'SubTitle'   => 'Text',
         'MetaTitle'  => 'Text',
@@ -17,7 +19,6 @@ class ExtraPageFieldsExtension extends SiteTreeExtension
 
     public function updateCMSFields(FieldList $fields)
     {
-
         //change Page Name label to Primary Heading - H1 - Only if the title hasn't already been changed
         /** @var TextField $titleField */
         $titleField = $fields->dataFieldByName('Title');
@@ -28,23 +29,40 @@ class ExtraPageFieldsExtension extends SiteTreeExtension
         //Add secondary heading - H2
         $fields->insertAfter(TextField::create('SubTitle', 'Secondary Heading'), 'Title');
 
-        if (!in_array('HasOnAfterUpdateCMSFieldsExtensionPoint', class_uses($this->owner))) {
+        $traits = $this->traitsUsedRecursive($this->owner->ClassName);
+        if (!in_array('HasOnAfterUpdateCMSFieldsExtensionPoint', $traits)) {
             $this->afterUpdateCMSFields($fields);
         }
     }
 
+    protected function traitsUsedRecursive($class, $traitNames = [])
+    {
+        if (!$class instanceof ReflectionClass) $class = new ReflectionClass($class);
+        $traitNames = array_merge($traitNames, $class->getTraitNames());
+        if ($class->getParentClass() != false) {
+            return array_merge($traitNames, $this->traitsUsedRecursive($class->getParentClass()));
+        }
+
+        return $traitNames;
+    }
+
     public function afterUpdateCMSFields(FieldList $fields)
     {
+        self::$runs++;
+
         /** @var ToggleCompositeField $metaDataChildren */
         $metaDataChildren = $fields->fieldByName('Root.Main.Metadata');
-//		ddd($metaDataChildren->fieldByName('MetaDescription'));
+        $length           = $this->owner->config()->MetaDescriptionLength ?: $this->MetaDescriptionLength;
+        if (!$metaDataChildren->fieldByName('MetaDescription')) {
+            ddd(self::$runs);
+        }
+        $metaDataChildren->fieldByName('MetaDescription')->setAttribute('maxlength', $length);
+
         $children = array_merge([$metaTitle = TextField::create('MetaTitle')], $metaDataChildren->getChildren()->toArray());
         $fields->removeFieldFromTab('Root.Main', 'Metadata');
         $fields->addFieldToTab('Root', Tab::create('Metadata'), 'Content');
 
         //Add META Title tag to METADATA
-        $length = $this->owner->config()->MetaDescriptionLength ?: $this->MetaDescriptionLength;
-        $metaDataChildren->fieldByName('MetaDescription')->setAttribute('maxlength', $length);
         $fields->addFieldsToTab('Root.Metadata', $children);
 
         $metaTitle->setDescription('Displayed as the tab/window name; Also displayed in search engine result listings as the page title.<br />
