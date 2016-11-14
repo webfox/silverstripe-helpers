@@ -31,7 +31,7 @@ Several of these helpers are disabled by default but can be enabled in the confi
  
 If you do not add the `HasOnAfterUpdateCMSFieldsExtensionPoint` trait to your base `Page` class then the extension will use an unreliable method of moving the pages. For this reason we suggest adding `use HasOnAfterUpdateCMSFieldsExtensionPoint;` to this class.
 
-As the trait overrides the constructor you may also set `has_after_update_cms_fields_extension_point` to true which will also enable the new method, however it becomes your responsibility to ensure you have merged the traits functionality into your constructor either manually or using 
+If you have a custom constructor already you will need to alias the traits constructor so you may call it.
 
 ```php
 class Page extends SiteTree {
