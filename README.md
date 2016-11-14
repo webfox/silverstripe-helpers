@@ -29,6 +29,8 @@ Several of these helpers are disabled by default but can be enabled in the confi
  - Adds a new "Meta Title" field
  - Automatically applied
  
+If you do not add the `HasOnAfterUpdateCMSFieldsExtensionPoint` trait to your base `Page` class then the extension will use an unreliable method of moving the pages. For this reason we suggest adding `use HasOnAfterUpdateCMSFieldsExtensionPoint;` to this class. 
+ 
 ##FooterMenuExtension##
  - Adds a new *ShowInFooter* option to the page settings
  - Adds a new `FooterPages()` function to the SiteTree to return only pages that have this checked
