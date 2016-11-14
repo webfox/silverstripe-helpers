@@ -28,8 +28,13 @@ class ExtraPageFieldsExtension extends SiteTreeExtension
         //Add secondary heading - H2
         $fields->insertAfter(TextField::create('SubTitle', 'Secondary Heading'), 'Title');
 
-        //Move meta fields to their own tab
+        if(!in_array('HasOnAfterUpdateCMSFieldsExtensionPoint', class_uses($this->owner))){
+            $this->afterUpdateCMSFields($fields);
+        }
+    }
 
+    public function afterUpdateCMSFields(FieldList $fields)
+    {
         /** @var ToggleCompositeField $metaDataChildren */
         $metaDataChildren = $fields->fieldByName('Root.Main.Metadata');
 //		ddd($metaDataChildren->fieldByName('MetaDescription'));
@@ -44,7 +49,6 @@ class ExtraPageFieldsExtension extends SiteTreeExtension
 
         $metaTitle->setDescription('Displayed as the tab/window name; Also displayed in search engine result listings as the page title.<br />
 									Falls back to the Primary Heading field if not provided.');
-
     }
 
     public function updateSettingsFields(FieldList $fields)
@@ -61,10 +65,11 @@ class ExtraPageFieldsExtension extends SiteTreeExtension
         return empty($this->owner->MenuTarget) ? '' : "target=\"{$this->owner->MenuTarget}\"";
     }
 
-    Public function MetaTags(& $tags) {
-        if(is_a(Director::get_current_page(), 'Security')){
+    Public function MetaTags(& $tags)
+    {
+        if (is_a(Director::get_current_page(), 'Security')) {
             $tags = $tags . '<meta name="robots" content="noindex">';
-        } 
+        }
     }
 
     public function onBeforeWrite()
@@ -79,6 +84,19 @@ class ExtraPageFieldsExtension extends SiteTreeExtension
             $this->owner->MetaDescription = $value;
         };
     }
+}
+
+trait HasOnAfterUpdateCMSFieldsExtensionPoint
+{
+    public function __construct($record = null, $isSingleton = false, $model = null)
+    {
+        parent::__construct($record, $isSingleton, $model);
+
+        $this->afterExtending('updateCMSFields', function (FieldList $fields) {
+            $this->extend('afterUpdateCMSFields', $fields);
+        });
+    }
+
 }
 
 
