@@ -28,10 +28,7 @@ class ExtraPageFieldsExtension extends SiteTreeExtension
         //Add secondary heading - H2
         $fields->insertAfter(TextField::create('SubTitle', 'Secondary Heading'), 'Title');
 
-        if (
-            !Page::config()->get('has_after_update_cms_fields_extension_point') &&
-            !in_array('HasOnAfterUpdateCMSFieldsExtensionPoint', class_uses($this->owner))
-        ) {
+        if (!in_array('HasOnAfterUpdateCMSFieldsExtensionPoint', class_uses($this->owner))) {
             $this->afterUpdateCMSFields($fields);
         }
     }
