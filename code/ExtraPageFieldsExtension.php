@@ -53,9 +53,7 @@ class ExtraPageFieldsExtension extends SiteTreeExtension
         /** @var ToggleCompositeField $metaDataChildren */
         $metaDataChildren = $fields->fieldByName('Root.Main.Metadata');
         $length           = $this->owner->config()->MetaDescriptionLength ?: $this->MetaDescriptionLength;
-        if (!$metaDataChildren->fieldByName('MetaDescription')) {
-            ddd(self::$runs);
-        }
+        
         $metaDataChildren->fieldByName('MetaDescription')->setAttribute('maxlength', $length);
 
         $children = array_merge([$metaTitle = TextField::create('MetaTitle')], $metaDataChildren->getChildren()->toArray());
