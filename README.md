@@ -7,6 +7,14 @@ Run the following to add this module as a requirement and install it via compose
 
 composer require "webfox/silverstripe-helpers"
 ```
+
+Add the following to your  `config.yml`:
+
+```yaml
+Page:
+  has_on_after_update_cms_fields: true
+```
+
 then browse to /dev/build?flush=all
 
 Several of these helpers are disabled by default but can be enabled in the config.
