@@ -30,6 +30,9 @@ class ExtraPageFieldsExtension extends SiteTreeExtension
         $fields->insertAfter(TextField::create('SubTitle', 'Secondary Heading'), 'Title');
 
         $traits = $this->traitsUsedRecursive($this->owner->ClassName);
+        if($this->owner->config()->get('has_on_after_update_cms_fields')){
+            $traits[] = 'HasOnAfterUpdateCMSFieldsExtensionPoint';
+        }
         if (!in_array('HasOnAfterUpdateCMSFieldsExtensionPoint', $traits)) {
             $this->afterUpdateCMSFields($fields);
         }
