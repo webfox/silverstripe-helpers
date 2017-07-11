@@ -21,11 +21,20 @@ class SS_RelativeAssetsResponse extends SS_HTTPResponse
 {
     public function setBody($body)
     {
-        $this->body = $body ? (string)$body : $body;
+        $body = $body ? (string)$body : $body;
 
-        //
-        $this->body = str_replace('"/assets/', '"assets/', $this->body);
-        $this->body = str_replace('"assets/', '"/assets/', $this->body);
+        $body = str_replace('"/assets/', '"assets/', $body);
+        $body = str_replace('"assets/', '"/assets/', $body);
+
+
+        if (class_exists('zz\Html\HTMLMinify')) {
+            $this->body = zz\Html\HTMLMinify::minify($body, [
+                'doctype' => zz\Html\HTMLMinify::DOCTYPE_HTML5,
+                'optimizationLevel' => zz\Html\HTMLMinify::OPTIMIZATION_ADVANCED
+            ]);
+        } else {
+            $this->body = $body;
+        }
     }
 
 
