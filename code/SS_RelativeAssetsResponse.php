@@ -25,9 +25,12 @@ class SS_RelativeAssetsResponse extends SS_HTTPResponse
 
         $body = str_replace('"/assets/', '"assets/', $body);
         $body = str_replace('"assets/', '"/assets/', $body);
+        
+        json_decode($body);
+        $bodyIsJson = json_last_error() === JSON_ERROR_NONE;
 
 
-        if (class_exists('zz\Html\HTMLMinify')) {
+        if (!$bodyIsJson && class_exists('zz\Html\HTMLMinify')) {
             $this->body = zz\Html\HTMLMinify::minify($body, [
                 'doctype' => zz\Html\HTMLMinify::DOCTYPE_HTML5,
                 'optimizationLevel' => zz\Html\HTMLMinify::OPTIMIZATION_ADVANCED
