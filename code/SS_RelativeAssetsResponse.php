@@ -22,8 +22,10 @@ class SS_RelativeAssetsResponse extends SS_HTTPResponse
     {
         $body = (string)$body;
 
+        $prefix = Config::inst()->get('Assets', 'host') ?: '/';
+
         $body = str_replace('"/assets/', '"assets/', $body);
-        $body = str_replace('"assets/', '"/assets/', $body);
+        $body = str_replace('"assets/', sprintf('"%sassets/', $prefix), $body);
 
         if (!json_decode($body) && class_exists('zz\Html\HTMLMinify')) {
             $this->body = zz\Html\HTMLMinify::minify($body, [
