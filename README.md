@@ -63,6 +63,13 @@ class Page extends SiteTree {
 ## Relative Assets Extension
  - Prefixes all references to `assets/*` with a preceeding slash i.e. they become something like `/assets/some.png`
  - If [zaininnari/html-minifier](https://github.com/zaininnari/html-minifier) is installed minifies the HTML output before rendering.
+ - If Assets.host config is set then Assets will be prefixed with this host.
+ 
+```yaml
+Assets:
+  host: '//example.com/'
+```
+Would equal `//example.com/assets/image.png`
 
 ## FooterMenuExtension
  - Adds a new *ShowInFooter* option to the page settings
